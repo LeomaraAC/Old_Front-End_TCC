@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+body{
+  background-image: url('./assets/img/Fundo/fundo3.jpg');
+  background-repeat: repeat-x;
+}
+mc-breadcrumbs>ol,
+.corHeader,
+mat-paginator {
+  background-color: #f5f5f5 !important;
+}
+
+/** *** Cards *** **/
+mat-card-title,
+mat-card-content,
+mat-card-actions {
+  padding: 10px 24px !important;
+}
+
+mat-form-field {
+  padding-left: 1%;
+  padding-right: 1%;
+  width: 100%
+}
+.tamanhoInput {
+  padding-left: 10%;
+  width: 90%;
+}
+
+mat-card-title {
+  border-bottom: 1px solid #ddd
+}
+
+mat-card-actions {
+  border-top: 1px solid #ddd
+}
+mat-card {
+  margin-bottom: 30px;
+}
+/*btn*/
+.btn {
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+}

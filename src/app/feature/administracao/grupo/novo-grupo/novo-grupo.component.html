@@ -1,0 +1,21 @@
+<mat-card [ngStyle]="{'padding':'0px'}">
+  <mat-card-title class="corHeader">Adicionar grupo</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="novoGrupo">
+      <mat-form-field [ngClass]="{'tamanhoInput':style}">
+          <input #busca matInput placeholder="Nome do Grupo" formControlName="descricao">
+      </mat-form-field>
+     <h6>Funcionalidades</h6>
+      <hr>
+      sdfsdfs
+  </form>
+  </mat-card-content>
+  <mat-card-actions class="corHeader">
+      <button class="btn btn-outline-success" (click)="submit()" [disabled]="!novoGrupo.valid">
+        <i class="fas fa-save"></i> Salvar
+      </button>
+      <button class="btn btn-outline-secondary" (click)="resetForm()"><i class="fas fa-eraser"></i> Limpar</button>
+      <button class="btn btn-outline-danger" routerLink="#" [ngStyle]="{'float':'right'}"><i class="fas fa-times"></i> Cancelar</button>
+  </mat-card-actions>
+</mat-card>
+<!-- [disabled]="!orderForm.valid || cartItems().length === 0" -->

@@ -1,0 +1,40 @@
+<mat-nav-list [style.height]="getHeight()" [class.menuSecundario]="menuSecundario" >
+
+  <!-- ==================================================================================-->
+  <!-- =====================================Menu Pequeno===================================-->
+  <div matTooltip="{{menu.name}}"  *ngIf="somenteIcones">
+    <!-- Bloco executado quando o item não possui um link -->
+  <mat-list-item *ngIf = "menu.link==false" (click)="menu.open = !menu.open">
+      <mat-icon matListIcon iconsmall  ><i class="{{menu.icon}}"></i></mat-icon>
+      <!-- Caso exista um submenu adiciona a imagem para mostra ou esconde-lo -->
+      <mat-icon *ngIf="chechForChildMenu()"  class="sidenav-dropdown-indicator " [ngClass]="{'indicateOpen':menu.open}"><i class="fas fa-angle-double-down"></i> <!-- <fa name="angle-double-down"></fa> --> </mat-icon>
+  </mat-list-item>
+
+  <!-- Bloco executado quando o item  possui um link -->
+  <mat-list-item *ngIf = "menu.link!=false" (click)="menu.open = !menu.open" [routerLink]="[menu.link]" >
+      <mat-icon matListIcon iconsmall  > <i class="{{menu.icon}}" ></i> </mat-icon>
+    </mat-list-item>
+  </div>
+  <!-- ==================================================================================-->
+  <!-- =====================================Menu Grande====================================-->
+
+  <div  *ngIf="!somenteIcones">
+      <!-- Bloco executado quando o item não possui um link -->
+    <mat-list-item *ngIf = "menu.link==false" (click)="menu.open = !menu.open">
+        <mat-icon matListIcon iconsmall  ><i class="{{menu.icon}}"></i></mat-icon>
+        <!-- Somente icone é true quando o menu estiver pequeno -->
+        <h3 matLine >{{ menu.name }} </h3>
+
+        <!-- Caso exista um submenu adiciona a imagem para mostra ou esconde-lo -->
+        <mat-icon *ngIf="chechForChildMenu()"  class="sidenav-dropdown-indicator " [ngClass]="{'indicateOpen':menu.open}"> <i class="fas fa-angle-double-down"></i><!-- <fa name="angle-double-down"></fa> --> </mat-icon>
+    </mat-list-item>
+
+    <!-- Bloco executado quando o item  possui um link -->
+    <mat-list-item *ngIf = "menu.link!=false" (click)="menu.open = !menu.open" [routerLink]="[menu.link]" >
+        <mat-icon matListIcon iconsmall  [class.espacoMenuSec]="menuSecundario" > <i class="{{menu.icon}}" ></i> </mat-icon>
+          <h3 matLine>{{ menu.name }} </h3>
+      </mat-list-item>
+    </div>
+    <!-- Chama o mesmo módulo caso exista um submenu  -->
+    <tcc-sidenav-item *ngFor="let  submenu of menu?.sub" [menu]="submenu" [somenteIcones]="somenteIcones" [menuSecundario]= true></tcc-sidenav-item>
+</mat-nav-list>

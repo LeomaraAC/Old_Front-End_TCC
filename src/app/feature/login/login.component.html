@@ -1,0 +1,27 @@
+<div class="row justify-content-center fundo">
+  <div class="col">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+      <div class="login-form">
+        <div class="row justify-content-center">
+            <h1>SSP <small>Campus Capivari</small></h1>
+        </div>
+        <!-- *ngIf="loginForm.controls['password'].hasError('required')" -->
+        <mat-form-field>
+          <input type="text" matInput placeholder="Usuário"  formControlName="user" autofocus>
+          <mat-icon matSuffix ><i class="fas fa-user-tie"></i></mat-icon>
+          <mat-error *ngIf="loginForm.controls['user'].hasError('required')">
+            Usuário é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Senha" formControlName="password">
+          <mat-icon matSuffix><i class="fas fa-key"></i></mat-icon>
+          <mat-error *ngIf="loginForm.controls['password'].hasError('required')" >
+            Email é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+        <button type="submit" class="log-btn btn-primary">Log in  <!-- <fa name="spinner" animation="pulse" *ngIf="loading"></fa> --></button>
+      </div>
+    </form>
+  </div>
+</div>
