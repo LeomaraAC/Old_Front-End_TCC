@@ -1,3 +1,13 @@
-<p>
-  modal works!
-</p>
+<h1 mat-dialog-title>
+    {{data.title}}
+  </h1>
+  <mat-divider></mat-divider>
+  <div mat-dialog-content>
+      <p *ngIf="data.error" class="text-center text-danger pt-3"> <i class="far fa-times-circle"></i></p>
+      <p *ngIf="data.success" class="text-center text-success pt-3"> <i class="far fa-check-circle"></i></p>
+    <p class="pt-3 text-center">{{data.message}}</p>
+    <mat-divider></mat-divider>
+  </div>
+  <div mat-dialog-actions>
+     <button mat-button (click)="onNoClick()" class="btn btn-outline-primary float-lg-right">Fechar</button>
+  </div>

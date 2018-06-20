@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import {
+  MatIconRegistry,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material';
 
 @Component({
   selector: 'tcc-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+export class ModalComponent {
+  constructor(
+    public dialogRef: MatDialogRef<ModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public matIconRegistry: MatIconRegistry
+  ) {
+    matIconRegistry.registerFontClassAlias('fa');
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
