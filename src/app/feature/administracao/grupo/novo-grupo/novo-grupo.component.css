@@ -5,3 +5,23 @@ hr {
 h6 {
   margin-top: 10px;
 }
+.btn-custon {
+  padding: 15px;
+}
+
+.btn-custon:hover {
+  color: #17a2b8;
+}
+table {
+  font-size: 15px;
+  margin-top: 15px;
+  width: 100%;
+}
+.mat-column-remover {
+  width: 80px;
+  font-size: 20px;
+  color: #dc3545;
+}
+.btn-trash {
+  cursor: pointer;
+}

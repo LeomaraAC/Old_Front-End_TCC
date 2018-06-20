@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ObservableMedia, MediaChange } from '@angular/flex-layout';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { PermissoesTelas } from './../../../../model/grupos/allGroups.model';
+import { ListarFuncComponent } from './listar-func/listar-func.component';
+import { ListaPermissoesSevices } from '../../../../core/services/administracao/listaPermissoes.service';
 
 @Component({
   selector: 'tcc-novo-grupo',
@@ -8,16 +12,33 @@ import { ObservableMedia, MediaChange } from '@angular/flex-layout';
   styleUrls: ['./novo-grupo.component.css']
 })
 export class NovoGrupoComponent implements OnInit {
-
+  /* Declaração das variáveis */
   novoGrupo: FormGroup;
   style: boolean;
-  constructor(private fb: FormBuilder, private media: ObservableMedia) { }
+  dataSource = new MatTableDataSource<PermissoesTelas>();
+  displayedColumns =  ['remover', 'funcao'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(
+    private fb: FormBuilder,
+    private media: ObservableMedia,
+    public dialog: MatDialog,
+    private funcoesSelected: ListaPermissoesSevices
+  ) {}
 
   ngOnInit() {
     this.media.subscribe((mediaChange: MediaChange) => this.toggleView());
+
     this.novoGrupo = this.fb.group({
-      descricao: this.fb.control('', [Validators.required, Validators.minLength(4)])
+      descricao: this.fb.control('', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(60)
+      ])
     });
+
+    this.dataSource.sort = this.sort;
   }
   resetForm() {
     this.novoGrupo.reset();
@@ -26,12 +47,29 @@ export class NovoGrupoComponent implements OnInit {
   submit() {
     console.log('Salvar grupo');
   }
-
+  adicionar() {
+    const dialogRef = this.dialog.open(ListarFuncComponent, {
+      width: '550px',
+      data: { }
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe(() => {
+        this.dataSource.data = this.funcoesSelected.getItens;
+        this.dataSource.paginator = this.paginator;
+      });
+  }
   toggleView(): void {
     if (this.media.isActive('xs')) {
       this.style = false;
     } else {
-     this.style = true;
+      this.style = true;
     }
+  }
+
+  /* Função para remover */
+  remove (element) {
+    this.funcoesSelected.removeValue(element);
+    this.dataSource.data = this.funcoesSelected.getItens;
   }
 }

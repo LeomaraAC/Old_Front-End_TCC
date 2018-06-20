@@ -3,19 +3,44 @@
   <mat-card-content>
     <form [formGroup]="novoGrupo">
       <mat-form-field [ngClass]="{'tamanhoInput':style}">
-          <input #busca matInput placeholder="Nome do Grupo" formControlName="descricao">
+          <input matInput placeholder="Nome do Grupo" formControlName="descricao" maxlength="60">
       </mat-form-field>
      <h6>Funcionalidades</h6>
       <hr>
-      sdfsdfs
+        <button  class="btn btn-outline-success" (click)="adicionar()">
+            <i class="fas fa-plus"></i>  Adicionar
+          </button>
+          <!-- Inicio da tabela -->
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"
+               [hidden]="dataSource.data.length === 0" matSort matSortDisableClear matSortDirection="asc">
+              <!-- Coluna para a remoção do item -->
+              <ng-container matColumnDef="remover">
+                  <th mat-header-cell *matHeaderCellDef>  </th>
+                  <td mat-cell *matCellDef="let element" (click)="remove(element)">
+                    <i class="fas fa-trash btn-trash" matTooltip="Remover funcionalidade"></i>
+                  </td>
+              </ng-container>
+
+              <!-- Coluna com a descrição da função -->
+              <ng-container matColumnDef="funcao">
+                  <th mat-header-cell *matHeaderCellDef  mat-sort-header> Função </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nomeTela}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons [hidden]="dataSource.data.length === 0"></mat-paginator>
   </form>
   </mat-card-content>
   <mat-card-actions class="corHeader">
-      <button class="btn btn-outline-success" (click)="submit()" [disabled]="!novoGrupo.valid">
-        <i class="fas fa-save"></i> Salvar
-      </button>
-      <button class="btn btn-outline-secondary" (click)="resetForm()"><i class="fas fa-eraser"></i> Limpar</button>
-      <button class="btn btn-outline-danger" routerLink="#" [ngStyle]="{'float':'right'}"><i class="fas fa-times"></i> Cancelar</button>
-  </mat-card-actions>
+      <div fxLayout fxLayout.xs="column wrap" fxLayoutGap="25px">
+        <button  class="btn btn-outline-success" (click)="submit()" [disabled]="!novoGrupo.valid">
+          <i class="fas fa-save"></i> Salvar
+        </button>
+        <button class="btn btn-outline-secondary" (click)="resetForm()"><i class="fas fa-eraser"></i> Limpar</button>
+        <button class="btn btn-outline-danger"><i class="fas fa-times"></i> Cancelar</button>
+      </div>
+
+      </mat-card-actions>
 </mat-card>
-<!-- [disabled]="!orderForm.valid || cartItems().length === 0" -->
+
