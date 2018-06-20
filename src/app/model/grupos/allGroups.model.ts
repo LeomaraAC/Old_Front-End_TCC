@@ -1,6 +1,6 @@
 export interface Page {
   current_page: number;
-  data: Array<Group>;
+  data: Array<any>;
   first_page_url: string;
   from: number;
   last_page: number;
@@ -15,4 +15,9 @@ export interface Page {
 export interface Group {
   idGrupo: number;
   nomeGrupo: string;
+}
+
+export interface PermissoesTelas {
+  idTelas: number;
+  nomeTela: String;
 }
