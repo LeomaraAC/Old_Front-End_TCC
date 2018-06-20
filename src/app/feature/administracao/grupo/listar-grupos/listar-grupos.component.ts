@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import {GrupoService} from '../../../../core/services/administracao/grupos.service';
 import { GruposDataSouce } from './../../../../core/services/administracao/grupos.datasource';
-import { tap, merge } from 'rxjs/operators';
+import { merge } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'tcc-listar-grupos',
@@ -18,7 +19,7 @@ export class ListarGruposComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private gruposService: GrupoService, public dataSource: GruposDataSouce,
+  constructor(public dataSource: GruposDataSouce,
               private searchService: SearchService) {}
 
   ngOnInit() {
@@ -31,9 +32,11 @@ export class ListarGruposComponent implements OnInit, AfterViewInit {
       this.loadGroupsPage();
     });
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-    // merge(this.sort.sortChange, this.paginator.page).pipe(
-    //   tap(() => this.loadGroupsPage())
-    // ).subscribe();
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+      tap(() => this.loadGroupsPage())
+    ).subscribe();
   }
   onRowClicked(row) {
     console.log('Row clicked: ', row);
