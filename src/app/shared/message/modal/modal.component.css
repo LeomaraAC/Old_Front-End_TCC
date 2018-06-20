@@ -1,0 +1,10 @@
+.mat-dialog-title {
+  text-align: center;
+  margin: 0 !important;
+}
+mat-divider{
+  background-color:#C0C0C0;
+}
+p i{
+  font-size: 80px;
+}
