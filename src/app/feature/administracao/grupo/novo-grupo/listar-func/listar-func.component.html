@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>
+  Busca de Funções
+  <i class="fas fa-times-circle btn-close" (click)="onNoClick()" matTooltip="Fechar"></i>
+</h1>
+<perfect-scrollbar>
+    <div mat-dialog-content>
+        <div class="spinner-container" *ngIf="dataSource.loading$ | async"> <!--  -->
+            <mat-spinner></mat-spinner>
+        </div>
+        <div [hidden]="dataSource.loading$ | async" >
+            <form [formGroup]="searchForm">
+                <mat-form-field>
+                    <input matInput placeholder="Buscar Função" formControlName="searchControl">
+                  </mat-form-field>
+            </form>
+                <table mat-table [dataSource]="dataSource"
+                matSort matSortDisableClear matSortActive="Funcao" matSortDirection="asc">
+
+                <!-- Coluna com o seletor -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let row">
+                      <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.changeValue(row) : null"
+                                    [checked]="selection.isSelected(row)">
+                      </mat-checkbox>
+                    </td>
+                </ng-container>
+                  <!-- Descrição da função -->
+                  <ng-container matColumnDef="funcao">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Função </th>
+                    <td mat-cell *matCellDef="let row"> {{row.nomeTela}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                      [ngClass]="{'highlight': selection.isSelected(row)}"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 15]"
+                                          [length]="dataSource?.totalPage | async"
+                                          [showFirstLastButtons]="true" ></mat-paginator>
+        </div>
+    </div>
+</perfect-scrollbar>

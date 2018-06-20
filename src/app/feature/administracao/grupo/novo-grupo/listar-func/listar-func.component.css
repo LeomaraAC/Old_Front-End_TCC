@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+.highlight{
+  /* background: #f5f5f5; */
+  background: #f7f6f6;
+  /* background: transparent; */
+}
+.btn-close{
+  float: right;
+  cursor: pointer;
+}
+.mat-column-select {
+  width: 80px;
+}
