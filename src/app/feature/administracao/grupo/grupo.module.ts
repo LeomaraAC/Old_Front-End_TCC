@@ -9,17 +9,22 @@ import {MatCardModule,
         MatProgressSpinnerModule,
         MatPaginatorModule,
         MatSortModule,
-        MatDividerModule} from '@angular/material';
+        MatButtonModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatCheckboxModule,
+        MatTooltipModule} from '@angular/material';
 import {PerfectScrollbarModule,
         PERFECT_SCROLLBAR_CONFIG,
         PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { GrupoComponent } from './grupo.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { ListarGruposComponent } from './listar-grupos/listar-grupos.component';
 import { NovoGrupoComponent } from './novo-grupo/novo-grupo.component';
+import { ListarFuncComponent } from './novo-grupo/listar-func/listar-func.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -44,20 +49,25 @@ const admRoutes: Routes = [
     GrupoComponent,
     PesquisaComponent,
     ListarGruposComponent,
-    NovoGrupoComponent
+    NovoGrupoComponent,
+    ListarFuncComponent
   ],
   imports: [
     PerfectScrollbarModule,
-   // AngularFontAwesomeModule,
+    MatButtonModule,
     FlexLayoutModule,
     MatCardModule,
     MatInputModule,
     MatTableModule,
+    MatDialogModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSortModule,
     ReactiveFormsModule,
+    FormsModule,
+    MatCheckboxModule,
     MatDividerModule,
+    MatTooltipModule,
     RouterModule.forChild(admRoutes)
   ],
   providers: [
@@ -65,6 +75,9 @@ const admRoutes: Routes = [
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     }
+  ],
+  entryComponents: [
+    ListarFuncComponent
   ]
 })
 export class GrupoModule {}
