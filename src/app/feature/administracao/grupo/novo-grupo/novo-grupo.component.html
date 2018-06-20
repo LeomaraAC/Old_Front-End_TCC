@@ -11,8 +11,7 @@
             <i class="fas fa-plus"></i>  Adicionar
           </button>
           <!-- Inicio da tabela -->
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"
-               [hidden]="dataSource.data.length === 0" matSort matSortDisableClear matSortDirection="asc">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" [hidden]="dataSource.data.length === 0">
               <!-- Coluna para a remoção do item -->
               <ng-container matColumnDef="remover">
                   <th mat-header-cell *matHeaderCellDef>  </th>
@@ -23,7 +22,7 @@
 
               <!-- Coluna com a descrição da função -->
               <ng-container matColumnDef="funcao">
-                  <th mat-header-cell *matHeaderCellDef  mat-sort-header> Função </th>
+                  <th mat-header-cell *matHeaderCellDef > Função </th>
                   <td mat-cell *matCellDef="let element"> {{element.nomeTela}} </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

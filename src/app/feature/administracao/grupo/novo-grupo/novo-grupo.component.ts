@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ObservableMedia, MediaChange } from '@angular/flex-layout';
-import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
 import { PermissoesTelas } from './../../../../model/grupos/allGroups.model';
 import { ListarFuncComponent } from './listar-func/listar-func.component';
 import { ListaPermissoesSevices } from '../../../../core/services/administracao/listaPermissoes.service';
@@ -18,7 +18,6 @@ export class NovoGrupoComponent implements OnInit {
   dataSource = new MatTableDataSource<PermissoesTelas>();
   displayedColumns =  ['remover', 'funcao'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +37,6 @@ export class NovoGrupoComponent implements OnInit {
       ])
     });
 
-    this.dataSource.sort = this.sort;
   }
   resetForm() {
     this.novoGrupo.reset();
@@ -47,18 +45,20 @@ export class NovoGrupoComponent implements OnInit {
   submit() {
     console.log('Salvar grupo');
   }
+
   adicionar() {
     const dialogRef = this.dialog.open(ListarFuncComponent, {
       width: '550px',
       data: { }
     });
-    dialogRef
-      .afterClosed()
-      .subscribe(() => {
+
+    dialogRef.afterClosed().subscribe(() => {
         this.dataSource.data = this.funcoesSelected.getItens;
         this.dataSource.paginator = this.paginator;
       });
+
   }
+
   toggleView(): void {
     if (this.media.isActive('xs')) {
       this.style = false;
