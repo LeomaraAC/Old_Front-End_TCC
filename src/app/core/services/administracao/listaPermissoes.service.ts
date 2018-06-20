@@ -14,6 +14,11 @@ export class ListaPermissoesSevices {
   quantityItems (): number {
     return this._itens.length;
   }
+
+  private _sort () {
+    this._itens.sort((item1, item2) => (item1.nomeTela <  item2.nomeTela) ? -1 : 1);
+  }
+
   /* Função para verificar se um item esta selecionado */
   isSelected(row) {
     const tela = this._itens.filter(item => item.idTelas === row.idTelas).length;
@@ -23,6 +28,7 @@ export class ListaPermissoesSevices {
   /* Função para marcar ou desmarcar um item */
   changeValue (row ) {
     this.isSelected(row) ?  this.removeValue(row) : this._itens.push(row);
+    this._sort();
   }
 
   /* Função para remover um item */
