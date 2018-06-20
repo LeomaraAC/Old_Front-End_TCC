@@ -12,6 +12,10 @@ mc-breadcrumbs>ol,
 mat-paginator {
   background-color: #f5f5f5 !important;
 }
+/* *** Carregamento das tabelas *** */
+.spinner-container mat-spinner {
+  margin: auto auto;
+}
 
 /** *** Cards *** **/
 mat-card-title,
