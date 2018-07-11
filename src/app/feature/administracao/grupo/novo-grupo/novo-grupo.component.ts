@@ -53,10 +53,13 @@ export class NovoGrupoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-        this.dataSource.data = this.funcoesSelected.getItens;
-        this.dataSource.paginator = this.paginator;
+        this.updateItens();
       });
 
+  }
+  updateItens() {
+    this.dataSource.data = this.funcoesSelected.getItens;
+    this.dataSource.paginator = this.paginator;
   }
 
   toggleView(): void {
