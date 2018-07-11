@@ -3,6 +3,7 @@ import { Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { BACKEND_API } from '../../../app.api';
 import {Page} from '../../../model/grupos/allGroups.model';
+import { ListaPermissoesSevices } from './listaPermissoes.service';
 
 @Injectable()
 export class GrupoService {
@@ -18,6 +19,13 @@ export class GrupoService {
       return this.http
         .get<Page>(`${BACKEND_API}groupUsers/grupo/${order}/${size}/${filter}`, { params: params });
     }
+  }
+
+  createGroup(descricaoGrupo: string, permissoes: ListaPermissoesSevices): Observable<string> {
+   return this.http.post<string>(`${BACKEND_API}groupUsers/grupo`, {
+    nomeGrupo: descricaoGrupo,
+    permissoes: permissoes.getItensId()
+   });
   }
 }
 
