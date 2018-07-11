@@ -39,11 +39,22 @@ export class NovoGrupoComponent implements OnInit {
 
   }
   resetForm() {
+    this.funcoesSelected.clear();
+    this.updateItens();
     this.novoGrupo.reset();
+    this.nomeGrupoRef.nativeElement.focus();
   }
 
   submit() {
-    console.log('Salvar grupo');
+    const valueForm = this.novoGrupo.value;
+    const qtde = this.funcoesSelected.quantityItems();
+    if (this.novoGrupo.valid && (qtde > 0)) {
+      this.service.createGroup(valueForm.descricao, this.funcoesSelected).subscribe(response => {
+        this.notificationService.notifySnackbar(response['message'], false);
+        this.funcoesSelected.clear();
+        this.router.navigate(['/grupos']);
+      });
+    }
   }
 
   adicionar() {
