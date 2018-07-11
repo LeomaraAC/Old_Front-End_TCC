@@ -3,10 +3,12 @@ import {CommonModule} from '@angular/common';
 import {MatDialogModule, MatDividerModule, MatIconModule} from '@angular/material';
 
 import {ModalComponent} from './message/modal/modal.component';
+import { SnackbarComponent } from './message/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
-    ModalComponent
+    ModalComponent,
+    SnackbarComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import {ModalComponent} from './message/modal/modal.component';
     MatIconModule
   ],
   exports: [
-    ModalComponent
+    ModalComponent,
+    SnackbarComponent
   ],
   entryComponents: [ModalComponent]
 })
