@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { GrupoService } from './../../../../core/services/administracao/grupos.service';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ObservableMedia, MediaChange } from '@angular/flex-layout';
 import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
 import { PermissoesTelas } from './../../../../model/grupos/allGroups.model';
 import { ListarFuncComponent } from './listar-func/listar-func.component';
 import { ListaPermissoesSevices } from '../../../../core/services/administracao/listaPermissoes.service';
+import { NotificationService } from '../../../../core/services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tcc-novo-grupo',
@@ -18,12 +21,16 @@ export class NovoGrupoComponent implements OnInit {
   dataSource = new MatTableDataSource<PermissoesTelas>();
   displayedColumns =  ['remover', 'funcao'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('nomeGrupo') nomeGrupoRef: ElementRef;
 
   constructor(
     private fb: FormBuilder,
     private media: ObservableMedia,
     public dialog: MatDialog,
-    private funcoesSelected: ListaPermissoesSevices
+    private funcoesSelected: ListaPermissoesSevices,
+    private service: GrupoService,
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   ngOnInit() {
