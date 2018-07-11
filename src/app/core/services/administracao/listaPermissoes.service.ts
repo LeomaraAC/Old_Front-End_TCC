@@ -10,6 +10,11 @@ export class ListaPermissoesSevices {
     return  this._itens;
   }
 
+  /* Retornar o id dos itens  */
+  getItensId(): number[] {
+    const idItens: number[] = this._itens.map((item) => item.idTelas);
+    return idItens;
+  }
   /* Quantidade de itens */
   quantityItems (): number {
     return this._itens.length;
