@@ -3,8 +3,21 @@
   <mat-card-content>
     <form [formGroup]="novoGrupo">
       <mat-form-field [ngClass]="{'tamanhoInput':style}">
-          <input matInput placeholder="Nome do Grupo" formControlName="descricao" maxlength="60">
-      </mat-form-field>
+          <input matInput #nomeGrupo autofocus placeholder="Nome do Grupo" formControlName="descricao"  maxlength="60">
+         <!-- Mensagem de erro para requerido -->
+          <mat-error *ngIf="novoGrupo.controls['descricao'].hasError('required')">
+            Nome do grupo é <strong>obrigatório</strong>
+          </mat-error>
+          <!-- Mensagem de erro para número mínimo de caracteres -->
+          <mat-error *ngIf="novoGrupo.controls['descricao'].hasError('minlength')">
+            Nome do grupo deve conter, no mínimo, <strong>4 caracteres</strong>
+          </mat-error>
+          <!-- Mensagem de erro para número máximo de caracteres -->
+          <mat-error *ngIf="novoGrupo.controls['descricao'].hasError('maxlength')">
+            Nome do grupo deve conter, no máximo, <strong>60 caracteres</strong>
+          </mat-error>
+
+        </mat-form-field>
      <h6>Funcionalidades</h6>
       <hr>
         <button  class="btn btn-outline-success" (click)="adicionar()">
