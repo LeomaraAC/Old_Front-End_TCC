@@ -43,6 +43,10 @@ export class ListaPermissoesSevices {
     this._itens.splice(indexRow, 1);
     }
   }
+  /* Limpar a lista */
+  clear() {
+    this._itens = [];
+  }
 
   /* Função responsável por retornar o index da linha */
   private _returnIndex(row): number {
