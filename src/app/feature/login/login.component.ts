@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(userLogin.user, userLogin.password).subscribe( user => { // Sucesso
         this.loading = false;
         // console.log(user)
-      }, response => this.nt.notify(response.error.error || 'Não autorizado!') , // Falha
+      }, response => this.nt.notifySnackbar(response.error.error || 'Não autorizado!', true) , // Falha
        () => this.router.navigate([ atob (this.navigateTo)])  // Fim do observable
       );
     } else {
