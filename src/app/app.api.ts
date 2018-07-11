@@ -1,1 +1,1 @@
-export const BACKEND_API = 'http://api-laravel.meu/api/'
+export const BACKEND_API = 'http://api-laravel.meu/api/';
