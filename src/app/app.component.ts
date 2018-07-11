@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.notification.notifier.subscribe(message =>
+    this.notification.notifierDialog.subscribe(message =>
       this.dialog.open(ModalComponent, {
         minWidth: '300px',
         data: { message: message, title: 'ERRO', error: true }
